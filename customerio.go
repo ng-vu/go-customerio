@@ -36,7 +36,7 @@ func NewCustomerIO(siteID, apiKey string) *CustomerIO {
 }
 
 // Identify identifies a customer and sets their attributes
-func (c *CustomerIO) Identify(customerID string, attributes map[string]interface{}) error {
+func (c *CustomerIO) Identify(customerID string, attributes interface{}) error {
 	j, err := json.Marshal(attributes)
 
 	if err != nil {
@@ -55,7 +55,7 @@ func (c *CustomerIO) Identify(customerID string, attributes map[string]interface
 }
 
 // Track sends a single event to Customer.io for the supplied user
-func (c *CustomerIO) Track(customerID string, eventName string, data map[string]interface{}) error {
+func (c *CustomerIO) Track(customerID string, eventName string, data interface{}) error {
 
 	body := map[string]interface{}{"name": eventName, "data": data}
 	j, err := json.Marshal(body)
@@ -76,7 +76,7 @@ func (c *CustomerIO) Track(customerID string, eventName string, data map[string]
 }
 
 // TrackAnonymous sends a single event to Customer.io for the anonymous user
-func (c *CustomerIO) TrackAnonymous(eventName string, data map[string]interface{}) error {
+func (c *CustomerIO) TrackAnonymous(eventName string, data interface{}) error {
 	body := map[string]interface{}{"name": eventName, "data": data}
 	j, err := json.Marshal(body)
 
